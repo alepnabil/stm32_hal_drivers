@@ -1,0 +1,25 @@
+/*
+ * 74hc.h
+ *
+ *  Created on: Sep 15, 2025
+ *      Author: alifn
+ */
+
+#ifndef 74HC_H_
+#define 74HC_H_
+
+
+
+#endif /* 74HC_H_ */
+
+
+
+// initialize function
+void init_74hc(GPIO_TypeDef* GPIO_PORT, uint8_t SER, uint8_t RCLCK, uint8_t SRCLCK, uint8_t SRCLR,
+			uint8_t OE);
+
+
+void en_shift_register_clck(GPIO_TypeDef* GPIO, uint16_t SRCLCK);
+void en_register_clock_output(GPIO_TypeDef* GPIO, uint16_t RCLCK);
+void en_clear_clock(GPIO_TypeDef* GPIO, uint16_t SRCLR);
+void en_enable_output(GPIO_TypeDef* GPIO, uint16_t OE);

@@ -1,0 +1,9 @@
+14:36:51 **** Incremental Build of configuration Debug for project number ****
+make all 
+Cannot run program "make": Launching failed
+
+Error: Program "make" not found in PATH
+PATH=[C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE//plugins/com.st.stm32cube.ide.jre.win64_3.4.0.202409160955/jre/bin/server;C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE//plugins/com.st.stm32cube.ide.jre.win64_3.4.0.202409160955/jre/bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\Users\alifn\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\alifn\AppData\Local\Programs\Python\Python313\;C:\Users\alifn\AppData\Local\Microsoft\WindowsApps;;C:\Users\alifn\AppData\Local\Programs\Ollama;C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE]
+
+14:36:51 Build Failed. 1 errors, 0 warnings. (took 39ms)
+

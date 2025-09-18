@@ -1,0 +1,197 @@
+/*
+ * lcd.c
+ *
+ *  Created on: Sep 6, 2025
+ *      Author: alifn
+ */
+
+
+#include <stdint.h>
+#include <stdio.h>
+#include "stm32f4xx_hal.h"   // brings in HAL + GPIO_TypeDef
+#include "stm32f4xx_hal_gpio.h"
+
+
+// creating a pointer that points to a struct of gpio. in this gpio, we have the registers(room)
+GPIO_TypeDef 	*lcdPort;
+// create a 16 bit mask for the Rs and En pin on the lcd
+uint16_t lcdRspin;
+uint16_t lcdEnpin;
+
+// create an array of 8 numbers that is 16 bits
+// this will be the mask for our data pins
+uint16_t lcdDatapin [8];
+
+
+
+// takes in the GPIO port connected to lcd
+// takes in enable and reset pins
+// takes in the GPIO pins 16 bit values and set it as the lcd pin
+
+void lcdSetup(GPIO_TypeDef *PORT, uint16_t RS, uint16_t En,
+		uint16_t D0,uint16_t D1,uint16_t D2,uint16_t D3,uint16_t D4,
+		uint16_t D5,uint16_t D6,uint16_t D7)
+{
+	lcdPort = PORT;
+	lcdRspin = RS;
+	lcdEnpin = En;
+	lcdDatapin[0] = D0;
+	lcdDatapin[1] = D1;
+	lcdDatapin[2] = D2;
+	lcdDatapin[3] = D3;
+	lcdDatapin[4] = D4;
+	lcdDatapin[5] = D5;
+	lcdDatapin[6] = D6;
+	lcdDatapin[7] = D7;
+
+
+}
+
+
+// writing 1 then wait then 0 to enable pin
+// this function is called everytime we want to display the data on lcd
+void lcdEnable()
+{
+
+	HAL_GPIO_WritePin(lcdPort, lcdEnpin, GPIO_PIN_SET);
+	HAL_Delay(500);
+	HAL_GPIO_WritePin(lcdPort, lcdEnpin, GPIO_PIN_RESET);
+
+
+
+}
+
+
+
+// function to send command to the lcd
+// we send the command by suppliyng a 1 byte data to it
+void lcdWrite(uint8_t data)
+{
+	// data = 0b10110101
+
+	for(int i = 0 ; i <8 ; i++)
+	{
+		// first iteration = create a bit mask of ob00000001
+		// when creating bitmask, it will always be 32 bit
+
+		// performs AND operation
+		// this is to check that 8th bit position is a 1 o r not
+		// if operation = 1, meaning that data 8th bit is 1
+		// then we just apply voltage to that pin
+
+
+		// flip the bit on the i-th position
+		if(data & (1<<i))
+		{
+			HAL_GPIO_WritePin(lcdPort,lcdDatapin[i],GPIO_PIN_SET);
+		}
+		else{
+			HAL_GPIO_WritePin(lcdPort,lcdDatapin[i],GPIO_PIN_RESET);
+
+		}
+	}
+	lcdEnable();
+
+}
+
+
+// create a function command that resets the pin first
+// then sends the commadn to the command function
+// we have a seperate function since this is to send command
+// when RS = 0, it is for sending command
+// we can send characters by enabling RS=1
+void lcdCommand(uint8_t command)
+{
+	HAL_GPIO_WritePin(lcdPort,lcdRspin,GPIO_PIN_RESET);
+	lcdWrite(command);
+}
+
+void lcdSendData(uint8_t message)
+{
+	HAL_GPIO_WritePin(lcdPort,lcdRspin,GPIO_PIN_SET);
+	lcdWrite(message);
+}
+
+
+
+// these are the commands that are send to the lcd to program it
+// 1. make it 8 bit
+//
+void lcdInit()
+{
+	lcdCommand(0x30); 	//  0 0 1 DL N F — — 0x30= 0011 0000 DL=1 means 8 Bit Mode. if only 1 1, then it will becom 4 bit
+	HAL_Delay(10);
+	lcdCommand(0x30);
+	HAL_Delay(10);
+	lcdCommand(0x30);
+	HAL_Delay(10);
+	lcdCommand(0x38);	// 0 0 0 0 1 DL N F — — 0x38= 0011 1000 N=1 means 2 or more lines
+	HAL_Delay(10);
+	lcdCommand(0x0E);	// 0 0 0 0 1 D C B		0x0E= 0000 1110 D=1 Display ON, C=1 Cursor ON
+	HAL_Delay(10);
+
+}
+
+
+// takes in a character
+// loop through the character by each element
+// send one bit of data at a time to the senddata function
+// then increments to the next element
+void lcd_send_string(char *string)
+{
+
+	while(*string)
+		lcdSendData(*string++);
+
+}
+
+
+// fuction to convert an integer to a string
+// takes int eh format we want to output our number
+// this format have many types, just check the documentation
+// takes in the number we want to convert
+void writeNumber(char *format,uint32_t number)
+{
+	// initialized empty arrays
+	char msg[20];
+	// convert the number
+	// takes in those empty arrays,format and the number. the converted number will be stored
+	// inside those empty arrays
+	sprintf(msg,format,number);
+	// send that pointer to the first element of the array to our write function
+	lcd_send_string(msg);
+
+}
+
+// same as above but just float
+void writeFloat(char *format,double float_number)
+{
+	char msg[20];
+	sprintf(msg,format,float_number);
+	lcd_send_string(msg);
+}
+
+
+// function to set the starting position to print the values
+void set_cursor(uint8_t row, uint8_t col)
+{
+	HAL_GPIO_WritePin(lcdPort, lcdRspin, GPIO_PIN_SET);
+
+	switch (row)
+		{
+		case 0:
+			lcdWrite(0x80+col); break;
+		case 1:
+			lcdWrite(0xC0+col); break;
+		case 2:
+			lcdWrite(0x80+0x14+col); break;
+		case 3:
+			lcdWrite(0xC0+0x14+col); break;
+		}
+
+}
+
+
+
+
+

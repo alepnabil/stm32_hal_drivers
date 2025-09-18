@@ -1,0 +1,579 @@
+15:24:47 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../74hc/74hc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"74hc/74hc.d" -MT"74hc/74hc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "74hc/74hc.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:109:11: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  109 |           send_data(data);
+      |           ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6244	     12	   1588	   7844	   1ea4	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+15:25:04 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-size  shift_register.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6244	     12	   1588	   7844	   1ea4	shift_register.elf
+Finished building: default.size.stdout
+ 
+15:37:40 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: error: unknown type name 'unint8_t'; did you mean 'uint8_t'?
+   97 |   unint8_t data1 =  0b00000000;
+      |   ^~~~~~~~
+      |   uint8_t
+../Core/Src/main.c:98:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   98 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+  100 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:101:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  101 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:11: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  110 |           send_data(data);
+      |           ^~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+15:38:01 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   99 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:101:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+  101 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:102:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  102 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:111:11: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  111 |           send_data(data);
+      |           ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6256	     12	   1588	   7856	   1eb0	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+15:38:43 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   99 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:101:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+  101 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:102:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  102 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:111:11: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  111 |           send_data(data);
+      |           ^~~~~~~~~
+../Core/Src/main.c:97:11: warning: unused variable 'data1' [-Wunused-variable]
+   97 |   uint8_t data1 =  0b00000000;
+      |           ^~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6248	     12	   1588	   7848	   1ea8	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+15:39:47 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   99 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:101:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+  101 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:102:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  102 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:111:11: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  111 |           send_data(data);
+      |           ^~~~~~~~~
+../Core/Src/main.c:97:11: warning: unused variable 'data1' [-Wunused-variable]
+   97 |   uint8_t data1 =  0b00000000;
+      |           ^~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6168	     12	   1588	   7768	   1e58	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+15:40:41 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:98:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   98 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+  100 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:101:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  101 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:11: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  110 |           send_data(data);
+      |           ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6164	     12	   1588	   7764	   1e54	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+15:43:05 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:98:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   98 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+  100 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:101:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  101 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:11: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  110 |           send_data(data);
+      |           ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6164	     12	   1588	   7764	   1e54	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+16:00:01 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:98:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   98 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+  100 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:101:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  101 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:96:11: warning: unused variable 'data' [-Wunused-variable]
+   96 |   uint8_t data = 0b00000110;
+      |           ^~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:124:20: error: expected '(' before 'HAL_GPIO_ReadPin'
+  124 |                 if HAL_GPIO_ReadPin(PC0_GPIO_Port,PC0_Pin)
+      |                    ^~~~~~~~~~~~~~~~
+      |                    (
+../Core/Src/main.c:124:59: error: expected ';' before '{' token
+  124 |                 if HAL_GPIO_ReadPin(PC0_GPIO_Port,PC0_Pin)
+      |                                                           ^
+      |                                                           ;
+  125 |                 {
+      |                 ~                                          
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+16:00:47 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:98:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   98 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+  100 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:101:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  101 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:96:11: warning: unused variable 'data' [-Wunused-variable]
+   96 |   uint8_t data = 0b00000110;
+      |           ^~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:126:25: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  126 |                         send_data(data);
+      |                         ^~~~~~~~~
+../Core/Src/main.c:126:35: error: 'data' undeclared (first use in this function)
+  126 |                         send_data(data);
+      |                                   ^~~~
+../Core/Src/main.c:126:35: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+16:01:15 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:126:25: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  126 |                         send_data(data);
+      |                         ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6140	     12	   1588	   7740	   1e3c	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+16:09:00 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:119:9: error: 'data' undeclared (first use in this function)
+  119 |         data = 0b00000101;
+      |         ^~~~
+../Core/Src/main.c:119:9: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:125:25: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  125 |                         send_data(data);
+      |                         ^~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+16:09:19 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:125:25: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  125 |                         send_data(data);
+      |                         ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6520	     12	   1588	   8120	   1fb8	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+16:13:42 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:125:25: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  125 |                         send_data(data);
+      |                         ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6520	     12	   1588	   8120	   1fb8	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+16:16:18 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:125:25: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  125 |                         send_data(data);
+      |                         ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6520	     12	   1588	   8120	   1fb8	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+16:16:44 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:125:25: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  125 |                         send_data(data);
+      |                         ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6520	     12	   1588	   8120	   1fb8	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+16:20:01 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:126:25: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  126 |                         send_data(data);
+      |                         ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6524	     12	   1588	   8124	   1fbc	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+16:23:44 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:123:17: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  123 |                 send_data(data);
+      |                 ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6452	     12	   1588	   8052	   1f74	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+16:27:14 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:123:17: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  123 |                 send_data(data);
+      |                 ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6452	     12	   1588	   8052	   1f74	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+16:27:47 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:123:17: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  123 |                 send_data(data);
+      |                 ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6452	     12	   1588	   8052	   1f74	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 

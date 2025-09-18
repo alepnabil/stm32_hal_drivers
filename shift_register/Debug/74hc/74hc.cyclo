@@ -1,0 +1,6 @@
+../74hc/74hc.c:33:6:init_74hc	1
+../74hc/74hc.c:48:6:en_shift_register_clck	1
+../74hc/74hc.c:57:6:en_register_clock_output	1
+../74hc/74hc.c:67:6:en_clear_clock	1
+../74hc/74hc.c:74:6:en_enable_output	1
+../74hc/74hc.c:81:6:send_data	3

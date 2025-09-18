@@ -1,0 +1,10 @@
+../lcd8bit/lcd.c:31:6:lcdSetup	1
+../lcd8bit/lcd.c:53:6:lcdEnable	1
+../lcd8bit/lcd.c:68:6:lcdWrite	3
+../lcd8bit/lcd.c:103:6:lcdCommand	1
+../lcd8bit/lcd.c:109:6:lcdSendData	1
+../lcd8bit/lcd.c:120:6:lcdInit	1
+../lcd8bit/lcd.c:140:6:lcd_send_string	2
+../lcd8bit/lcd.c:153:6:writeNumber	1
+../lcd8bit/lcd.c:167:6:writeFloat	1
+../lcd8bit/lcd.c:176:6:set_cursor	5

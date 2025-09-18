@@ -1,0 +1,105 @@
+/*
+ * 74hc.c
+ *
+ *  Created on: Sep 15, 2025
+ *      Author: alifn
+ */
+
+
+/*
+ * 74hc.c
+ *
+ *  Created on: Sep 15, 2025
+ *      Author: alifn
+ */
+
+
+#include <stdint.h>
+#include <stdio.h>
+#include "stm32f4xx_hal.h"   // brings in HAL + GPIO_TypeDef
+#include "stm32f4xx_hal_gpio.h"
+
+#include "stm32f4xx_hal.h"
+
+
+uint16_t icpin [6];
+
+
+GPIO_TypeDef *IC_PORT;
+
+
+
+// initialize function
+void init_74hc(GPIO_TypeDef* GPIO_PORT, uint16_t SER, uint16_t RCLCK, uint16_t SRCLCK, uint16_t SRCLR, uint16_t OE)
+{
+
+	IC_PORT = GPIO_PORT;
+	icpin[0] = SER;
+	icpin[1] = RCLCK;
+	icpin[2] = SRCLCK;
+	icpin[3] = SRCLR;
+	icpin[4] = OE;
+
+}
+
+
+// enable the shift register clock to FF
+void en_shift_register_clck(void)
+{
+	HAL_GPIO_WritePin(IC_PORT,icpin[2],GPIO_PIN_SET);
+	HAL_GPIO_WritePin(IC_PORT,icpin[2],GPIO_PIN_RESET);
+
+}
+
+
+void en_register_clock_output(void)
+{
+	HAL_GPIO_WritePin(IC_PORT,icpin[1],GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(IC_PORT,icpin[1],GPIO_PIN_SET);
+}
+
+
+void en_clear_clock(void)
+{
+	HAL_GPIO_WritePin(IC_PORT, icpin[3],GPIO_PIN_SET);
+
+
+}
+
+void en_enable_output(void)
+{
+	HAL_GPIO_WritePin(IC_PORT, icpin[4],GPIO_PIN_RESET);
+
+}
+
+
+void send_data(uint8_t data)
+{
+
+	for (int i = 7; i >= 0; i--) {
+		if((1 << i) &  data)
+		{
+			HAL_GPIO_WritePin(IC_PORT, icpin[0], GPIO_PIN_SET);
+
+		}
+		else{
+			HAL_GPIO_WritePin(IC_PORT, icpin[0], GPIO_PIN_RESET);
+		}
+		en_shift_register_clck();
+
+	}
+	en_register_clock_output();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

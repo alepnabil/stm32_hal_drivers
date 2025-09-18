@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;shift_register/Core/Src/74hc.c&apos;" deleteContents="false" description="Delete resource &apos;shift_register/Core/Src/74hc.c&apos;" element1="/shift_register/Core/Src/74hc.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1757922266723"/>
+</session>

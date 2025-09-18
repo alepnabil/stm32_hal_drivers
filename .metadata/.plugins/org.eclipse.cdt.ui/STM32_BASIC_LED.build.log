@@ -1,0 +1,10 @@
+14:36:51 **** Incremental Build of configuration Debug for project STM32_BASIC_LED ****
+make -j16 all 
+arm-none-eabi-size  STM32_BASIC_LED.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8136	     32	   1640	   9808	   2650	STM32_BASIC_LED.elf
+Finished building: default.size.stdout
+ 
+
+14:36:51 Build Finished. 0 errors, 0 warnings. (took 192ms)
+

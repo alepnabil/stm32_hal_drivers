@@ -1,0 +1,34 @@
+16:27:47 **** Incremental Build of configuration Debug for project shift_register ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:97:3: warning: implicit declaration of function 'init_74hc' [-Wimplicit-function-declaration]
+   97 |   init_74hc(PC5_GPIO_Port, PC8_Pin, PC9_Pin, PC6_Pin, PC5_Pin,PC3_Pin);
+      |   ^~~~~~~~~
+../Core/Src/main.c:99:3: warning: implicit declaration of function 'en_clear_clock' [-Wimplicit-function-declaration]
+   99 |   en_clear_clock();
+      |   ^~~~~~~~~~~~~~
+../Core/Src/main.c:100:3: warning: implicit declaration of function 'en_enable_output' [-Wimplicit-function-declaration]
+  100 |   en_enable_output();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:123:17: warning: implicit declaration of function 'send_data' [-Wimplicit-function-declaration]
+  123 |                 send_data(data);
+      |                 ^~~~~~~~~
+arm-none-eabi-gcc -o "shift_register.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\alifn\STM32CubeIDE\workspace_1.19.0\shift_register\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="shift_register.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: shift_register.elf
+ 
+arm-none-eabi-size  shift_register.elf 
+arm-none-eabi-objdump -h -S shift_register.elf  > "shift_register.list"
+arm-none-eabi-objcopy  -O ihex shift_register.elf  "shift_register.hex"
+   text	   data	    bss	    dec	    hex	filename
+   6452	     12	   1588	   8052	   1f74	shift_register.elf
+Finished building: default.size.stdout
+ 
+Finished building: shift_register.hex
+ 
+Finished building: shift_register.list
+ 
+
+16:27:47 Build Finished. 0 errors, 4 warnings. (took 597ms)
+
