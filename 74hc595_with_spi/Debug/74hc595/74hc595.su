@@ -1,0 +1,4 @@
+../74hc595/74hc595.c:20:6:init_74hc595	24	static
+../74hc595/74hc595.c:32:6:en_register_clock_output	8	static
+../74hc595/74hc595.c:41:6:en_clear_clock	8	static
+../74hc595/74hc595.c:49:6:en_enable_output	8	static

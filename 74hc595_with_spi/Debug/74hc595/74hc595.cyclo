@@ -1,0 +1,4 @@
+../74hc595/74hc595.c:20:6:init_74hc595	1
+../74hc595/74hc595.c:32:6:en_register_clock_output	1
+../74hc595/74hc595.c:41:6:en_clear_clock	1
+../74hc595/74hc595.c:49:6:en_enable_output	1
