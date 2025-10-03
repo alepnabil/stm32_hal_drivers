@@ -20,6 +20,7 @@
 #include "main.h"
 #include <stdint.h>
 #include "stdio.h"
+#include "mpu6050.h"
 
 
 /* Private includes ----------------------------------------------------------*/
@@ -44,8 +45,6 @@
 
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
-
-
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
@@ -117,124 +116,19 @@ int main(void)
   int len;
 
 
-  uint8_t data_reg;
-  uint8_t pwr_data = 0;
 
 
-  HAL_StatusTypeDef ret;
 
 
-//  ret=HAL_I2C_IsDeviceReady(&hi2c1, 0b1101000<<1+0, 1, 100);
-//  if (ret != HAL_OK) {
-//	      uint32_t error = HAL_I2C_GetError(&hi2c1);
-//	      char msg[50];
-//	      snprintf(msg, sizeof(msg), "I2C Error: 0x%lX\r\n", error);
-//	      HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), 100);
-//	  }
-//	  else {
-//	      char msg[] = "Write OK\r\n";
-//	      HAL_UART_Transmit(&huart2, (uint8_t*)msg, sizeof(msg)-1, 100);
-//	  }
-  /* Infinite loop */
+
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
 
-	  // transmit data to slave and the address we want to read
 
+	  	  read_sensor_status(hi2c1,slave_address, who_am_i,huart2);
 
-	   //read from WHO_AM_I register to check status of sensor
-	   HAL_I2C_Mem_Read(&hi2c1, slave_address, who_am_i, I2C_MEMADD_SIZE_8BIT, &data_reg,1,100);
-
-
-		// convert asci to decima
-		len=snprintf(tx_buffer, sizeof(tx_buffer), "0x%02X\r\n",data_reg);
-
-		HAL_UART_Transmit(&huart2, (uint8_t*)tx_buffer, len, 100);
-
-
-
-
-		  if(data_reg == 0x68){
-			  // Transmission success
-			    char error_msg[] = "I2C transmit okay\r\n";
-
-				HAL_UART_Transmit(&huart2, (uint8_t*)error_msg, sizeof(error_msg)-1, 100);
-
-
-		  }
-		  else
-		  {
-		      // Transmission failed
-		      char ok_msg[] = "I2C Transmit not ok\r\n";
-		      HAL_UART_Transmit(&huart2, (uint8_t*)ok_msg, sizeof(ok_msg)-1, 100);
-		  }
-
-
-	   //write to power management register and check status
-	   //pwr data == data to config register and set settings
-	  //ret=HAL_I2C_Mem_Write(&hi2c1, slave_address, pwr_reg, I2C_MEMADD_SIZE_8BIT, &pwr_data, 1,100);
-
-//	  if (ret != HAL_OK) {
-//	      uint32_t error = HAL_I2C_GetError(&hi2c1);
-//	      char msg[50];
-//	      snprintf(msg, sizeof(msg), "I2C Error: 0x%lX\r\n", error);
-//	      HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), 100);
-//	  }
-//	  else {
-//	      char msg[] = "Write OK\r\n";
-//	      HAL_UART_Transmit(&huart2, (uint8_t*)msg, sizeof(msg)-1, 100);
-//	  }
-
-//	  if(ret != HAL_OK){
-//		  // Transmission success
-//			char error_msg[] = "no write okay\r\n";
-//
-//			HAL_UART_Transmit(&huart2, (uint8_t*)error_msg, sizeof(error_msg)-1, 100);
-//
-//
-//	  }
-//	  else
-//	  {
-//		  // Transmission failed
-//		  char ok_msg[] = "write okay\r\n";
-//		  HAL_UART_Transmit(&huart2, (uint8_t*)ok_msg, sizeof(ok_msg)-1, 100);
-//	  }
-//
-
-
-
-
-//	  uint8_t wake = 0x00;
-//	  HAL_I2C_Mem_Write(&hi2c1, slave_address, 0x6B, I2C_MEMADD_SIZE_8BIT, &wake, 1, 100);
-//
-//
-//
-//	  ret = HAL_I2C_Master_Transmit(&hi2c1, slave_address, &temp_reg, 1, HAL_MAX_DELAY);
-//	  if (ret != HAL_OK)
-//	  {
-//	      // Transmission failed
-//	      char error_msg[] = "I2C Transmit Failed!\r\n";
-//	      HAL_UART_Transmit(&huart2, (uint8_t*)error_msg, sizeof(error_msg)-1, 100);
-//	  }
-//	  else
-//	  {
-//	      // Transmission successful
-//	      char ok_msg[] = "I2C Transmit OK\r\n";
-//	      HAL_UART_Transmit(&huart2, (uint8_t*)ok_msg, sizeof(ok_msg)-1, 100);
-//	  }
-//
-//
-//	  // receive data and store data in data buffer
-//	  HAL_I2C_Master_Receive(&hi2c1, slave_address, &temp_data_buffer, 1, HAL_MAX_DELAY);
-
-
-	  // 3. FORMAT: Convert the raw byte into a human-readable hexadecimal string
-//	  len = snprintf(tx_buffer, sizeof(tx_buffer), "0x%02X\r\n", temp_data_buffer);
-//
-//	  // 4. TRANSMIT (UART): Send the ASCII string to PuTTY
-//	  HAL_UART_Transmit(&huart2, (uint8_t*)tx_buffer, len, 100);
 
 
     /* USER CODE BEGIN 3 */
