@@ -115,21 +115,21 @@ int main(void)
   {
     /* USER CODE END WHILE */
 	  // Place your data-sending code inside the loop
-	     uint8_t data = 0b11111111;
-
-		 HAL_SPI_Transmit(&hspi1, &data, 1, 100);
-
-		 // Latch the data to the outputs
-		 en_register_clock_output();
-
-		 // Add a delay so you can see the results
-		 HAL_Delay(500);
+	  	 // data send willl be by most significant bit
+//	     uint8_t data = 0b11111111;
+//
+//		 HAL_SPI_Transmit(&hspi1, &data, 1, 100);
+//
+//		 // Latch the data to the outputs
+//		 en_register_clock_output();
+//
+//		 // Add a delay so you can see the results
+//		 HAL_Delay(1000);
 
 		 // You can change the data to see different patterns
-		 data = 0b00000000;
+		 uint8_t data = 0b11111111;
 		 HAL_SPI_Transmit(&hspi1, &data, 1, 100);
 		 en_register_clock_output();
-		 HAL_Delay(500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
