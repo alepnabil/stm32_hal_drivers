@@ -106,13 +106,13 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
 
-  MPU6050_Init(&hi2c1,slave_address);
+  //MPU6050_Init(&hi2c1,slave_address);
 
 
   float accel_x_data;
   char tx_buffer[64];
 
-
+  write_data_to_flash(huart2);
 
 
 
@@ -124,13 +124,12 @@ int main(void)
 
 		  //read_sensor_status(hi2c1,slave_address, who_am_i,huart2);
 		  //read_temp_data(hi2c1,slave_address,huart2);
-	  	accel_x_data=read_accel_x(hi2c1,slave_address,huart2);
+	  	//accel_x_data=read_accel_x(hi2c1,slave_address,huart2);
 
 
-		int len = snprintf(tx_buffer, sizeof(tx_buffer),
-						   "Accel X raw: %d, g: %.2f\r\n", accel_x_data);
+		//int len = snprintf(tx_buffer, sizeof(tx_buffer),"Accel X raw: %d, g: %.2f\r\n", accel_x_data);
 
-		HAL_UART_Transmit(&huart2, (uint8_t*)tx_buffer, len, 100);
+		//HAL_UART_Transmit(&huart2, (uint8_t*)tx_buffer, len, 100);
 
     /* USER CODE BEGIN 3 */
   }

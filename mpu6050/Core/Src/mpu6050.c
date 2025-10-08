@@ -11,6 +11,7 @@
 #include "stdio.h"
 #include "main.h"
 #include "mpu6050.h"
+#include "string.h"
 
 void read_sensor_status(I2C_HandleTypeDef hi2c1,uint8_t slave_address,uint16_t internal_address, UART_HandleTypeDef huart2)
 {
@@ -70,9 +71,8 @@ void read_temp_data(I2C_HandleTypeDef hi2c1,uint8_t slave_address,UART_HandleTyp
 	int16_t temp_data_dec= (int16_t)(temperature_data[0] << 8 | temperature_data[1]);
 	float temperature_celsius = ((float)temp_data_dec / 340.0f) + 36.53f;
 
-	int len_temp = snprintf(temp_decimal_value, sizeof(temp_decimal_value), "Temp: %.2f C (Raw: %d)\r\n",temperature_celsius);
-
-	HAL_UART_Transmit(&huart2, (uint8_t*)temp_decimal_value, len_temp, 100);
+	//int len_temp = snprintf(temp_decimal_value,sizeof(temp_decimal_value), "Temp: %.2f C (Raw: %d)\r\n", temperature_celsius,raw_temp_value);
+	//HAL_UART_Transmit(&huart2, (uint8_t*)temp_decimal_value, len_temp, 100);
 
 
 }
@@ -119,6 +119,37 @@ float read_accel_x(I2C_HandleTypeDef hi2c1,uint8_t slave_address,UART_HandleType
 	return accel_x_g;
 
 }
+
+
+void write_data_to_flash(UART_HandleTypeDef huart2)
+{
+	HAL_StatusTypeDef status;
+	int len;
+
+	char flash_unlock_error[] ="Unlocking flash success";
+
+	status=HAL_FLASH_Unlock();
+	if(status == HAL_OK)
+	{
+	    len = strlen(flash_unlock_error);
+	    HAL_UART_Transmit(&huart2, (uint8_t*)flash_unlock_error, len, 100);
+	}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //void uart_print_reg_val(uint8_t *reg_val_ptr,UART_HandleTypeDef huart2)
