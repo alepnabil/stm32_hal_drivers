@@ -15,4 +15,7 @@ extern UART_HandleTypeDef huart2;
 
 
 void read_sensor_status(I2C_HandleTypeDef hi2c1,uint8_t slave_address,uint16_t internal_address,UART_HandleTypeDef huart2);
+void read_temp_data(I2C_HandleTypeDef hi2c1,uint8_t slave_address,UART_HandleTypeDef huart2);
+float read_accel_x(I2C_HandleTypeDef hi2c1,uint8_t slave_address,UART_HandleTypeDef huart2);
+void MPU6050_Init(I2C_HandleTypeDef *hi2c, uint8_t slave_address);
 

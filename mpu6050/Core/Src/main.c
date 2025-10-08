@@ -105,17 +105,12 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
-  /* USER CODE END 2 */
-  uint8_t temp_reg = temperature_reg;
-  uint8_t temp_data_buffer;
+
+  MPU6050_Init(&hi2c1,slave_address);
 
 
-  uint8_t who_am_i = who_am_i_reg;
-
-  char tx_buffer[10];
-  int len;
-
-
+  float accel_x_data;
+  char tx_buffer[64];
 
 
 
@@ -127,9 +122,15 @@ int main(void)
     /* USER CODE END WHILE */
 
 
-	  	  read_sensor_status(hi2c1,slave_address, who_am_i,huart2);
+		  //read_sensor_status(hi2c1,slave_address, who_am_i,huart2);
+		  //read_temp_data(hi2c1,slave_address,huart2);
+	  	accel_x_data=read_accel_x(hi2c1,slave_address,huart2);
 
 
+		int len = snprintf(tx_buffer, sizeof(tx_buffer),
+						   "Accel X raw: %d, g: %.2f\r\n", accel_x_data);
+
+		HAL_UART_Transmit(&huart2, (uint8_t*)tx_buffer, len, 100);
 
     /* USER CODE BEGIN 3 */
   }
