@@ -13,6 +13,8 @@
 #include "mpu6050.h"
 #include "string.h"
 
+#define flash_start_address (0x0806 0000)
+
 void read_sensor_status(I2C_HandleTypeDef hi2c1,uint8_t slave_address,uint16_t internal_address, UART_HandleTypeDef huart2)
 {
 
@@ -124,9 +126,14 @@ float read_accel_x(I2C_HandleTypeDef hi2c1,uint8_t slave_address,UART_HandleType
 void write_data_to_flash(UART_HandleTypeDef huart2)
 {
 	HAL_StatusTypeDef status;
-	int len;
+	HAL_StatusTypeDef erase_status;
 
-	char flash_unlock_error[] ="Unlocking flash success";
+	int len;
+	static FLASH_EraseInitTypeDef EraseInitStruct;
+
+
+	char flash_unlock_error[] ="Unlocking flash success\t";
+	char flash_erase_success[] = "Erase sector success\t";
 
 	status=HAL_FLASH_Unlock();
 	if(status == HAL_OK)
@@ -134,6 +141,34 @@ void write_data_to_flash(UART_HandleTypeDef huart2)
 	    len = strlen(flash_unlock_error);
 	    HAL_UART_Transmit(&huart2, (uint8_t*)flash_unlock_error, len, 100);
 	}
+
+	// init erase struct and fill in parameters
+	// erase only sectors
+	EraseInitStruct.TypeErase = FLASH_TYPEERASE_SECTORS;
+
+	// eras only sector 7 as it is the lowest memory block for safety purpose
+	EraseInitStruct.Sector = FLASH_SECTOR_7;
+
+	// erase only 1 sector
+	EraseInitStruct.NbSectors = 1;
+
+
+	// set voltage range for current dev board 2.7v~3.6V
+	EraseInitStruct.VoltageRange = FLASH_VOLTAGE_RANGE_3;
+
+
+	int sector_error=0;
+	erase_status=HAL_FLASHEx_Erase(&EraseInitStruct, &sector_error);
+
+	if(erase_status == HAL_OK)
+	{
+		 len = strlen(flash_erase_success);
+		 HAL_UART_Transmit(&huart2, (uint8_t*)flash_erase_success, len, 100);
+	}
+
+
+
+
 
 
 
