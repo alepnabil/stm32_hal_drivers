@@ -103,6 +103,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_I2C1_Init();
+  MPU6050_Init(hi2c1, slave_address);
   /* USER CODE BEGIN 2 */
 
 
@@ -112,8 +113,6 @@ int main(void)
   float accel_x_data;
   char tx_buffer[64];
 
-  write_data_to_flash(huart2);
-
 
 
   /* USER CODE BEGIN WHILE */
@@ -122,14 +121,22 @@ int main(void)
     /* USER CODE END WHILE */
 
 
-		  //read_sensor_status(hi2c1,slave_address, who_am_i,huart2);
-		  //read_temp_data(hi2c1,slave_address,huart2);
-	  	//accel_x_data=read_accel_x(hi2c1,slave_address,huart2);
+	  	  // read sensor data
+		  read_sensor_status(hi2c1,slave_address, who_am_i_reg,huart2);
 
+		  // read temperature data and store to flash
+		  float temp_data = read_temp_data(hi2c1,slave_address,huart2);
+		  write_data_to_flash(huart2,temp_data);
 
-		//int len = snprintf(tx_buffer, sizeof(tx_buffer),"Accel X raw: %d, g: %.2f\r\n", accel_x_data);
+		  read_data_from_flash(huart2);
 
-		//HAL_UART_Transmit(&huart2, (uint8_t*)tx_buffer, len, 100);
+		  // read accel x data
+		  accel_x_data=read_accel_x(hi2c1,slave_address,huart2);
+		  uart_print_debug(huart2, "Accel  : %.3f \r \n",accel_x_data);
+
+		  // more clear message
+		  uart_print_debug(huart2, " ------\r\n");
+
 
     /* USER CODE BEGIN 3 */
   }
