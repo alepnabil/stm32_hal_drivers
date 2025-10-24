@@ -18,10 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <stdint.h>
-#include "stdio.h"
-#include "mpu6050.h"
-
+#define slave_address (0x68<<1)
+#define temperature_reg 0x41
+#define who_am_i_reg 0x75
+#define pwr_reg 0x6B
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -45,6 +45,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
+
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
@@ -70,10 +71,41 @@ static void MX_I2C1_Init(void);
   * @retval int
   */
 
-#define slave_address (0x68<<1)
-#define temperature_reg 0x41
-#define who_am_i_reg 0x75
-#define pwr_reg 0x6B
+
+uint8_t raw_accel_data[6];
+HAL_StatusTypeDef read_data_status;
+volatile uint8_t data_ready = 0 ;
+
+void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c_p)
+{
+	// Corrected Check:
+	if(hi2c_p->Instance == I2C1)
+	{
+
+		data_ready=1;
+	}
+
+}
+
+void uart_print_accel_data()
+{
+	// shift first 8 bit to the lleft and perform or operation for reading accel  x
+	int16_t accel_x_data = (int16_t)(raw_accel_data[0] << 8 | raw_accel_data[1]);
+	int16_t accel_y_data = (int16_t)(raw_accel_data[2] << 8 | raw_accel_data[3]);
+	int16_t accel_z_data = (int16_t)(raw_accel_data[4] << 8 | raw_accel_data[5]);
+
+	// scale data
+	float accel_x_g = accel_x_data / 16384.0f;
+	float accel_y_g = accel_y_data / 16384.0f;
+	float accel_z_g = accel_z_data / 16384.0f;
+
+	uart_print_debug(&huart2, "Accel X : %.3f \r \n",accel_x_g);
+	uart_print_debug(&huart2, "Accel Y : %.3f \r \n",accel_y_g);
+	uart_print_debug(&huart2, "Accel Z : %.3f \r \n",accel_z_g);
+}
+
+
+
 
 
 int main(void)
@@ -103,41 +135,57 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_I2C1_Init();
-  MPU6050_Init(hi2c1, slave_address);
+
+  // init sensor
+  MPU6050_Init(&hi2c1, slave_address);
+
+
+  // Start the first I2C read in interrupt mode
+    if (HAL_I2C_Mem_Read_IT(&hi2c1, slave_address, 0x3B, I2C_MEMADD_SIZE_8BIT, raw_accel_data, 6) == HAL_OK)
+        uart_print_debug(&huart2, "First interrupt read started\r\n");
+    else
+        uart_print_debug(&huart2, "Failed to start first interrupt read\r\n");
+
   /* USER CODE BEGIN 2 */
 
+  /* USER CODE END 2 */
 
-  //MPU6050_Init(&hi2c1,slave_address);
-
-
-  float accel_x_data;
-  char tx_buffer[64];
-
-
-
+  /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
 
 
-	  	  // read sensor data
-		  read_sensor_status(hi2c1,slave_address, who_am_i_reg,huart2);
-
-		  // read temperature data and store to flash
-		  float temp_data = read_temp_data(hi2c1,slave_address,huart2);
-		  write_data_to_flash(huart2,temp_data);
-
-		  read_data_from_flash(huart2);
-
-		  // read accel x data
-		  accel_x_data=read_accel_x(hi2c1,slave_address,huart2);
-		  uart_print_debug(huart2, "Accel  : %.3f \r \n",accel_x_data);
-
-		  // more clear message
-		  uart_print_debug(huart2, " ------\r\n");
 
 
+	  if (data_ready)
+	  {
+		  data_ready=0;
+		  uart_print_accel_data();
+
+		  // Restart I2C read for next measurement
+		if (HAL_I2C_Mem_Read_IT(&hi2c1, slave_address, 0x3B, I2C_MEMADD_SIZE_8BIT, raw_accel_data, 6) != HAL_OK)
+		{
+			uart_print_debug(&huart2, "Failed to restart interrupt read\r\n");
+		}
+	  }
+
+
+
+	  //read_gyro_data(hi2c1, slave_address, huart2);
+
+
+	  //read_sensor_status(hi2c1, slave_address,who_am_i_reg, huart2);
+
+//	  HAL_StatusTypeDef status = HAL_I2C_Mem_Read_IT(&hi2c1, slave_address, 0x3B, I2C_MEMADD_SIZE_8BIT, raw_accel_data, 6);
+//
+//	  if (status == HAL_OK)
+//		 uart_print_debug(&huart2, "Started interrupt read\r\n");
+//	  else
+//		 uart_print_debug(&huart2, "Failed, status = %d\r\n", status);
+//
+//	  HAL_Delay(100);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
