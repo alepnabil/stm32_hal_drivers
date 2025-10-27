@@ -18,10 +18,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#define slave_address (0x68<<1)
-#define temperature_reg 0x41
-#define who_am_i_reg 0x75
-#define pwr_reg 0x6B
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -45,6 +41,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
+DMA_HandleTypeDef hdma_i2c1_rx;
 
 UART_HandleTypeDef huart2;
 
@@ -55,6 +52,7 @@ UART_HandleTypeDef huart2;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
@@ -72,20 +70,24 @@ static void MX_I2C1_Init(void);
   */
 
 
+#define slave_address (0x68<<1)
+#define temperature_reg 0x41
+#define who_am_i_reg 0x75
+#define pwr_reg 0x6B
+#define accel_address 0x3B
+
+int data_ready=0;
 uint8_t raw_accel_data[6];
-HAL_StatusTypeDef read_data_status;
-volatile uint8_t data_ready = 0 ;
+
 
 void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c_p)
 {
-	// Corrected Check:
-	if(hi2c_p->Instance == I2C1)
-	{
-
-		data_ready=1;
-	}
-
+		if(hi2c_p->Instance == I2C1)
+		{
+			data_ready = 1;
+		}
 }
+
 
 void uart_print_accel_data()
 {
@@ -103,9 +105,6 @@ void uart_print_accel_data()
 	uart_print_debug(&huart2, "Accel Y : %.3f \r \n",accel_y_g);
 	uart_print_debug(&huart2, "Accel Z : %.3f \r \n",accel_z_g);
 }
-
-
-
 
 
 int main(void)
@@ -133,59 +132,39 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USART2_UART_Init();
   MX_I2C1_Init();
-
-  // init sensor
-  MPU6050_Init(&hi2c1, slave_address);
-
-
-  // Start the first I2C read in interrupt mode
-    if (HAL_I2C_Mem_Read_IT(&hi2c1, slave_address, 0x3B, I2C_MEMADD_SIZE_8BIT, raw_accel_data, 6) == HAL_OK)
-        uart_print_debug(&huart2, "First interrupt read started\r\n");
-    else
-        uart_print_debug(&huart2, "Failed to start first interrupt read\r\n");
-
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
+
+  // init DMA reading data
+  // but the first data read will not be printed
+  if(HAL_I2C_Mem_Read_DMA(&hi2c1, slave_address,accel_address, I2C_MEMADD_SIZE_8BIT, raw_accel_data, 6) == HAL_OK)
+  {
+	  uart_print_debug(&huart2, "Init DMA success \r\n");
+
+  }
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-
-
-
-
-	  if (data_ready)
+	  if(data_ready==1)
 	  {
+		  // reset flag
 		  data_ready=0;
-		  uart_print_accel_data();
+		  // read data again and reset status flag
+		  if(HAL_I2C_Mem_Read_DMA(&hi2c1, slave_address,accel_address, I2C_MEMADD_SIZE_8BIT, raw_accel_data, 6) == HAL_OK)
+		  {
+			  // print data
+			  uart_print_accel_data();
 
-		  // Restart I2C read for next measurement
-		if (HAL_I2C_Mem_Read_IT(&hi2c1, slave_address, 0x3B, I2C_MEMADD_SIZE_8BIT, raw_accel_data, 6) != HAL_OK)
-		{
-			uart_print_debug(&huart2, "Failed to restart interrupt read\r\n");
-		}
+		  }
+
 	  }
-
-
-
-	  //read_gyro_data(hi2c1, slave_address, huart2);
-
-
-	  //read_sensor_status(hi2c1, slave_address,who_am_i_reg, huart2);
-
-//	  HAL_StatusTypeDef status = HAL_I2C_Mem_Read_IT(&hi2c1, slave_address, 0x3B, I2C_MEMADD_SIZE_8BIT, raw_accel_data, 6);
-//
-//	  if (status == HAL_OK)
-//		 uart_print_debug(&huart2, "Started interrupt read\r\n");
-//	  else
-//		 uart_print_debug(&huart2, "Failed, status = %d\r\n", status);
-//
-//	  HAL_Delay(100);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -301,6 +280,22 @@ static void MX_USART2_UART_Init(void)
   /* USER CODE BEGIN USART2_Init 2 */
 
   /* USER CODE END USART2_Init 2 */
+
+}
+
+/**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Stream0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
 
 }
 
